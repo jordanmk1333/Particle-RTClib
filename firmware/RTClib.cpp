@@ -1,7 +1,7 @@
 // Code by JeeLabs http://news.jeelabs.org/code/
 // Released to the public domain! Enjoy!
 
-#include <Wire.h>
+
 #include "RTClib.h"
 
 #ifdef SPARK
@@ -12,7 +12,13 @@
 #include "WProgram.h"
 #endif
 
-
+#ifdef __AVR_ATtiny85__
+#include <TinyWireM.h>
+#else
+#ifndef SPARK
+#include <Wire.h>
+#endif
+#endif
 
 static uint8_t read_i2c_register(uint8_t addr, uint8_t reg) {
   Wire.beginTransmission(addr);
