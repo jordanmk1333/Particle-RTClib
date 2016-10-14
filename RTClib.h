@@ -4,7 +4,16 @@
 #ifndef _RTCLIB_H_
 #define _RTCLIB_H_
 
-#include <Arduino.h>
+
+#ifdef SPARK
+#include "application.h"
+#elif (ARDUINO >= 100)
+#include "Arduino.h"25
+#else
+#include "WProgram.h"
+#endif
+
+
 class TimeSpan;
 
 
@@ -44,7 +53,7 @@ public:
     uint8_t dayOfTheWeek() const;
 
     // 32-bit times as seconds since 1/1/2000
-    long secondstime() const;   
+    long secondstime() const;
     // 32-bit times as seconds since 1/1/1970
     uint32_t unixtime(void) const;
 
